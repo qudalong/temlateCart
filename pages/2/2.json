@@ -1,1 +1,5 @@
-{}
+{
+  "usingComponents": {
+    "v-cart": "/components/cart-contart/index"
+  }
+}

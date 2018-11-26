@@ -13,11 +13,7 @@
           <view>月售量{{food.xs_num}}份</view>
           <view class='row'>
             <view>￥{{food.money}}</view>
-            <view class='operation'>
-              <view wx:if='{{food.count}}' class='iconfont icon-jian' data-parent-index='{{index}}' data-index='{{indexs}}' bindtap='minus'></view>
-              <view wx:if='{{food.count}}' class='count'>{{food.count}}</view>
-              <view class='iconfont icon-jia' data-food='{{food}}'  data-parent-index='{{index}}' data-index='{{indexs}}' bindtap='add'></view>
-            </view>
+            <v-cart food="{{food}}"  bind:selectFoods='onSelectFoods'></v-cart>    
           </view>
         </view>
       </view>
@@ -26,14 +22,10 @@
 </view>
 <!-- 购物车 -->
 <view class='shop-cart'>
-  <view class='item' wx:for='{{cartList}}' wx:for-item="food" wx:key='unquie'>
-  <block wx:if='{{food.count}}'>
-    <view>{{food.name}}</view>
-    <view class='operation'>
-      <view wx:if='{{food.count}}' class='iconfont icon-jian' data-parent-index='{{index}}' data-index='{{indexs}}' bindtap='minus'></view>
-      <view wx:if='{{food.count}}' class='count'>{{food.count}}</view>
-      <view class='iconfont icon-jia'  data-parent-index='{{index}}' data-index='{{indexs}}' bindtap='add'></view>
-    </view>
+  <view class='item' wx:for='{{selectFoods}}' wx:for-item="food" wx:key='unquie'>
+    <block >
+      <view>{{food.name}}</view>
+      <v-cart food="{{food}}"></v-cart>
     </block>
   </view>
 </view>

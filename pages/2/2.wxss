@@ -60,5 +60,5 @@
   width: 100%;
   background: #ccc;
   padding: 20px;
-  color: #fff;
+  color: #000;
 }
