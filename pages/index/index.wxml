@@ -1,0 +1,43 @@
+<!-- 轮播图 -->
+<swiper indicator-dots='{{indicatorDots}}' autoplay='{{autoplay}}' interval='{{interval}}' duration='{{duration}}' indicator-color='#ccc' indicator-active-color='#fff'>
+  <block wx:for='{{imgUrls}}' wx:key='unquie'>
+    <swiper-item>
+      <image src='{{item}}' class='slide-image' />
+    </swiper-item>
+  </block>
+</swiper>
+<!-- 卡片广告 -->
+<view class='banner'>
+  <image src='/images/banner3.png' bindtap='bindCard' />
+</view>
+
+<!-- 选项卡 列表 -->
+<view class='container'>
+  <v-tab-bar bind:tab='checkCurrent' />
+  <!-- 筛选条件 -->
+  <view class='filter-wrap'>
+    <picker class='picker-change' bindchange="bindPickerChange" value="{{index}}" range="{{areaArray}}">
+      <view class="select">
+        {{areaArray[index]}}
+      </view>
+    </picker>
+    <view class='search'>
+      <input type='text' placeholder='请输入关键字搜索' />
+    </view>
+  </view>
+  <!-- 内容列表 -->
+  <view class='list-wrap'>
+    <block wx:if='{{list}}' wx:for='{{list}}' wx:key='unquie'>
+      <view class='item' hover-class='hover' bindtap='bindMap' data-lng='{{item.lng}}' data-lat='{{item.lat}}' data-name='{{item.name}}' data-address='{{item.address}}'>
+        <view class='details'>
+          <view class='name'>{{item.name}}</view>
+          <view class='adress'>{{item.address}}</view>
+        </view>
+        <view class='position'>
+          <image class='icon-position' src='/images/icon-position.png' />
+          <view class='distance'>{{item.k}}km</view>
+        </view>
+      </view>
+    </block>
+  </view>
+</view>

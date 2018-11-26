@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "无感出行",
+  "usingComponents": {
+    "v-tab-bar": "/components/tab-bar/index"
+  }
+}

@@ -1,0 +1,13 @@
+<image class='banner' src='/images/banner5.png' />
+<view class='bind-wrap'>
+  <view class='row'>
+    <input type='number' placeholder='请输入手机号' bindinput='bindTelInput' maxlength='11' />
+  </view>
+  <view class='row'>
+    <input class='yzm' type='text' placeholder='请输入验证码' />
+    <view class='btn-yzm' bindtap='getCode' hover-class='hover'>验证码</view>
+  </view>
+  <view class='row'>
+    <view class='btn-login' hover-class='hover'>登录</view>
+  </view>
+</view>

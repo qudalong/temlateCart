@@ -1,0 +1,37 @@
+<view class='box'>
+  <view class='left'>
+    <view wx:if='{{list.length}}' wx:for='{{list}}' wx:key='unquie' class='b'>
+      <view>{{item.type_name}}</view>
+    </view>
+  </view>
+  <view class='right'>
+    <view wx:if='{{list.length}}' wx:for='{{list}}' wx:key='unquie'>
+      <view wx:for='{{item.goods}}' wx:for-item="food" wx:for-index="indexs" wx:key='unquie' class='item'>
+        <image src='https://mp.ucloudant.com/attachment/{{food.img}}' class='imag'></image>
+        <view class='a-right'>
+          <view>{{food.name}}</view>
+          <view>月售量{{food.xs_num}}份</view>
+          <view class='row'>
+            <view>￥{{food.money}}</view>
+            <view class='operation'>
+              <view wx:if='{{food.count}}' class='iconfont icon-jian' data-parent-index='{{index}}' data-index='{{indexs}}' bindtap='minus'></view>
+              <view wx:if='{{food.count}}' class='count'>{{food.count}}</view>
+              <view class='iconfont icon-jia' data-parent-index='{{index}}' data-index='{{indexs}}' bindtap='add'></view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<!-- 购物车 -->
+<view class='shop-cart'>
+  <view class='item' wx:for='{{cartList}}' wx:key='unquie'>
+    <view>{{item.name}}</view>
+    <view class='operation'>
+      <view wx:if='{{food.count}}' class='iconfont icon-jian' data-parent-index='{{index}}' data-index='{{indexs}}' bindtap='minus'></view>
+      <view wx:if='{{food.count}}' class='count'>{{food.count}}</view>
+      <view class='iconfont icon-jia' data-parent-index='{{index}}' data-index='{{indexs}}' bindtap='add'></view>
+    </view>
+  </view>
+</view>
