@@ -10,7 +10,7 @@ Page({
    */
   data: {
     list: [],
-    cartList:[]
+    cartList: []
   },
   onLoad: function(options) {
     wx.request({
@@ -25,21 +25,29 @@ Page({
     })
   },
   add(e) {
+    const food = e.currentTarget.dataset.food
     const parentIndex = e.currentTarget.dataset.parentIndex
     const index = e.currentTarget.dataset.index
     const currentFood = this.data.list[parentIndex].goods[index]
-    // currentFood.count ? currentFood.count = currentFood.count + 1 : currentFood.count = 1
     if (currentFood.count) {
       currentFood.count += 1
+      const i = this.data.cartList.findIndex((value)=>{
+        return value.name == currentFood.name
+      })
+      this.data.cartList[i].count+=1
+      console.log('tou')
     } else {
       currentFood.count = 1
-    this.data.cartList.push(currentFood)
+      this.data.cartList.push(currentFood)
+      console.log('mei')
     }
+
+
+
     this.setData({
       list: this.data.list,
       cartList: this.data.cartList
     })
-    console.log(this.data.cartList)
   },
 
 
@@ -47,11 +55,27 @@ Page({
     const parentIndex = e.currentTarget.dataset.parentIndex
     const index = e.currentTarget.dataset.index
     const currentFood = this.data.list[parentIndex].goods[index]
-    currentFood.count ? currentFood.count = currentFood.count - 1 : currentFood.count = 0
+    if (currentFood.count) {
+      currentFood.count = currentFood.count - 1
+      const i = this.data.cartList.findIndex((value) => {
+        return value.name == currentFood.name
+      })
+      this.data.cartList[i].count = this.data.cartList[i].count - 1
+      if (this.data.cartList[i].count == 0) {
+        this.data.cartList.splice(i,1)
+      }
+    }
     this.setData({
-      list: this.data.list
+      list: this.data.list,
+      cartList: this.data.cartList
     })
   },
+
+
+
+
+
+
   onReady: function() {},
   onShow: function() {
     console.log('onshow')
