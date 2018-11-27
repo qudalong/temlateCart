@@ -10,7 +10,6 @@ Page({
    */
   data: {
     list: [],
-    goods: [],
     selectFoods: []
   },
   onLoad: function(options) {
@@ -22,18 +21,47 @@ Page({
         that.setData({
           list: res.data,
         })
-        for (let i in that.data.list) {
-          for (let j in that.data.list[i].goods) {
-            let count = `list[${i}].goods[${j}].count`
-            that.setData({
-              [count]:0
-            })
-          }
-        }
         // console.log(that.data.list)
       },
     })
   },
+
+
+  onStepperEvent(e){
+    let { typeOneIndex, goodIndex, goodId, xsNum, goodOne, goodCount } = e.detail
+    let { list, selectFoods} = this.data
+    let good = list[typeOneIndex].goods[goodIndex]
+    //在这里改变自定义count的值
+    list[typeOneIndex].goods[goodIndex].count = goodCount
+    //添加属性要传的属性
+    good.typeOneIndex = typeOneIndex;
+    good.goodIndex = goodIndex;
+    if (selectFoods.includes(good)){
+      let index = selectFoods.indexOf(good)
+      // 当前商品为0是清空
+      goodCount === 0 ? selectFoods.splice(index, 1) : selectFoods[index].count = goodCount
+    }else{
+      selectFoods.push(good)
+    }
+    this.setData({
+      list,
+      selectFoods
+    })
+  },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   onSelectFoods() {
     let foods = []
     for (let i in this.data.list){

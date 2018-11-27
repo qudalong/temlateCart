@@ -1,5 +1,5 @@
 {
   "usingComponents": {
-    "v-cart": "/components/cart-contart/index"
+    "v-cart-control": "/components/cart-control/index"
   }
 }

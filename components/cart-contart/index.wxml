@@ -1,5 +1,0 @@
-<view class='operation'>
-  <view  class='iconfont icon-jian'  bindtap='minus'></view>
-  <view  class='count'>{{food.count}}</view>
-  <view class='iconfont icon-jia' bindtap='add'></view>
-</view>

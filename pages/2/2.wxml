@@ -5,19 +5,16 @@
     </view>
   </view>
   <view class='right'>
-    <view wx:if='{{list.length}}' wx:for='{{list}}' wx:key='unquie'>
-      <view wx:for='{{item.goods}}' wx:for-item="food" wx:for-index="indexs" wx:key='unquie' class='item'>
-        <image src='https://mp.ucloudant.com/attachment/{{food.img}}' class='imag'></image>
+    <view wx:if='{{list.length}}' wx:for='{{list}}' wx:for-item="oneItem" wx:for-index="typeOneIndex" wx:key='unquie'>
+      <view wx:for='{{oneItem.goods}}' wx:for-item="good" wx:for-index="goodIndex" wx:key='unquie' class='item'>
+        <image src='https://mp.ucloudant.com/attachment/{{good.img}}' class='imag'></image>
         <view class='a-right'>
-          <view>{{food.name}}</view>
-          <view>月售量{{food.xs_num}}份</view>
+          <view>{{good.name}}</view>
+          <view>月售量{{good.xs_num}}份</view>
           <view class='row'>
-            <view>￥{{food.money}}</view>
-            <view class='operation'>
-              <view class='iconfont icon-jian' bindtap='minus'></view>
-              <view class='count'>{{food.count}}</view>
-              <view class='iconfont icon-jia' bindtap='add'></view>
-            </view>
+            <view data->￥{{good.money}}</view>
+            <!-- 购物车控制器 -->
+            <v-cart-control typeOneIndex='{{typeOneIndex}}' goodIndex='{{goodIndex}}' goodId='{{good.id}}' xsNum='{{good.xs_num}}' goodOne='{{good.one}}' goodCount='{{good.count}}' bind:stepperEvent='onStepperEvent'></v-cart-control>
           </view>
         </view>
       </view>
@@ -26,14 +23,11 @@
 </view>
 <!-- 购物车 -->
 <view class='shop-cart'>
-  <view class='item' wx:for='{{selectFoods}}' wx:for-item="food" wx:key='unquie'>
+  <view class='item' wx:if='{{selectFoods.length}}' wx:for='{{selectFoods}}' wx:key='unquie'>
     <block>
-      <view>{{food.name}}</view>
-      <view class='operation'>
-        <view class='iconfont icon-jian' bindtap='minus'></view>
-        <view class='count'>{{food.count}}</view>
-        <view class='iconfont icon-jia' bindtap='add'></view>
-      </view>
+      <view>{{item.name}}</view>
+      <!-- 购物车控制器 -->
+      <v-cart-control typeOneIndex='{{item.typeOneIndex}}' goodIndex='{{item.goodIndex}}' goodId='{{item.id}}' xsNum='{{item.xs_num}}' goodOne='{{item.one}}' goodCount='{{item.count}}' bind:stepperEvent='onStepperEvent'></v-cart-control>
     </block>
   </view>
 </view>
