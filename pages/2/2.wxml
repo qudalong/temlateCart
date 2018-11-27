@@ -26,6 +26,7 @@
   <view class='item' wx:if='{{selectFoods.length}}' wx:for='{{selectFoods}}' wx:key='unquie'>
     <block>
       <view>{{item.name}}</view>
+      <view>￥{{item.money*item.count}}</view>
       <!-- 购物车控制器 -->
       <v-cart-control typeOneIndex='{{item.typeOneIndex}}' goodIndex='{{item.goodIndex}}' goodId='{{item.id}}' xsNum='{{item.xs_num}}' goodOne='{{item.one}}' goodCount='{{item.count}}' bind:stepperEvent='onStepperEvent'></v-cart-control>
     </block>
