@@ -1,10 +1,10 @@
 {
   "pages":[
+    "pages/3/3",
     "pages/2/2",
     "pages/5/5",
     "pages/index/index",
     "pages/bind/bind",
-    "pages/3/3",
     "pages/4/4",
     "pages/6/6",
     "pages/logs/logs"

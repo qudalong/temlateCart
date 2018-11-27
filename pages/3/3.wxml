@@ -1,1 +1,24 @@
-<button bindtap='go'>3</button>
+  <view class="goodMgrAdd__pic">
+    <view class="goodMgrAdd__pic--text">
+      <text>商品图片</text>
+    </view>
+
+
+
+
+
+
+    <view class="goodMgrAdd__pic--pb20">
+      <view wx:for="{{formData.pics}}" wx:key="goodMgrAdd__pic--content-{{index}}" class="goodMgrAdd__pic--content">
+        <view class="pic-added">
+          <image src="{{item}}"></image>
+          <view data-index="{{index}}" class="btn" bindtap="handleDelPic">
+          </view>
+        </view>
+      </view>
+      <view wx:if="{{(formData.pics.length < 9)}}" class="goodMgrAdd__pic--content">
+        <button class="pic__btn--add" plain bindtap="handleChoosePic">
+        </button>
+      </view>
+    </view>
+  </view>
