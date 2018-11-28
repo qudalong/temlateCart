@@ -67,19 +67,19 @@ Page({
     }
   },
 
-  clearShopCart(){
+  clearShopCart() {
     let data = this.data.list;
     let goods = this.data.selectFoods;
-    let typeOneIndex, typeTwoIndex, goodsIndex;
+    let typeOneIndex, goodIndex;
     for (let i = 0; i < goods.length; i++) {
-        typeOneIndex = goods[i].typeOneIndex;
-        goodIndex = goods[i].goodIndex;
+      typeOneIndex = goods[i].typeOneIndex;
+      goodIndex = goods[i].goodIndex;
+      data[typeOneIndex].goods[goodIndex].count = 0;
     }
-        data[typeOneIndex].goods[goodIndex].count = 0;
 
     this.setData({
       selectFoods: [],
-      list
+      list: this.data.list
     })
   },
 
