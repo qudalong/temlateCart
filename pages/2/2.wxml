@@ -31,7 +31,7 @@
 <view class='shop-cart' catchtap='showCartList'>
   <view class='cart'>
     <view class="iconfont icon-gouwuche {{selectFoods.length ? 'hight' : 'gary'}}"></view>
-    <view class='total-money'>共100元</view>
+    <view class='total-money'>共{{totalMoney}}元</view>
   </view>
   <view class='btn'>选好了</view>
 </view>
