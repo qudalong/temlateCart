@@ -1,20 +1,31 @@
-.item,.box {
+.container{
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom:100rpx;
+  width: 100%;
+  display: flex;
+  background: #fff;
+  overflow: hidden;
+}
+.item {
   display: flex;
 }
 .shop-cart .item {
   display: flex;
   justify-content: space-between;
-  padding-right:30px;
+  padding-right:60rpx;
 }
 
-.left {
-  width: 100px;
+.left-wrapper {
+  width: 200rpx;
   text-align: center;
-  padding: 10px;
+  padding-right: 20rpx;
   font-size: 30rpx;
+  background: #f0f0f0;
 }
 
-.right {
+.right-wrapper {
   flex: 1;
   text-align: center;
   font-size: 30rpx;
@@ -22,7 +33,7 @@
 .item{
   margin-bottom: 5px;
 }
-.b {
+.nav-item {
   padding: 10px;
   border-bottom: 1px solid #ccc;
 }
@@ -53,12 +64,24 @@
   align-items: center;
   justify-content: space-between;
 }
+
 .shop-cart{
   position: fixed;
   left: 0;
   bottom: 0;
+  height: 100rpx;
   width: 100%;
-  background: #ccc;
-  padding: 20px;
-  color: #000;
+  background: red;
+}
+.type-name{
+  padding: 10rpx;
+  text-align: left;
+  background: #f0f0f0;
+}
+.type-wrapper .item:last-child{
+  margin-bottom: 0;
+}
+.active{
+  background: #fff;
+  color: #6d9eeb;
 }
