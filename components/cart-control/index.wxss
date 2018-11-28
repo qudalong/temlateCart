@@ -61,11 +61,13 @@
   position: relative;
   min-width: 140rpx;
   height: 50rpx;
+  margin-right: 30rpx;
 }
 
 .icon-jian, .icon-jia {
   position: absolute;
   bottom: 0;
+  font-size: 52rpx;
 }
 
 .icon-jian {

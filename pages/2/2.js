@@ -13,7 +13,8 @@ Page({
     selectFoods: [],
     navActive: 0,
     heightArr: [],
-    containerH: 0
+    containerH: 0,
+    closeShadow: false
   },
   onLoad: function(options) {
     var that = this
@@ -52,7 +53,37 @@ Page({
 
   },
 
-  //左边选择联动
+  closeShadow() {
+    this.setData({
+      closeShadow: false
+    })
+  },
+
+  showCartList() {
+    if (this.data.selectFoods.length) {
+      this.setData({
+        closeShadow: true
+      })
+    }
+  },
+
+  clearShopCart(){
+    let data = this.data.list;
+    let goods = this.data.selectFoods;
+    let typeOneIndex, typeTwoIndex, goodsIndex;
+    for (let i = 0; i < goods.length; i++) {
+        typeOneIndex = goods[i].typeOneIndex;
+        goodIndex = goods[i].goodIndex;
+    }
+        data[typeOneIndex].goods[goodIndex].count = 0;
+
+    this.setData({
+      selectFoods: [],
+      list
+    })
+  },
+
+  //左边点击联动
   chooseType(e) {
     const id = e.currentTarget.dataset.id
     const index = e.currentTarget.dataset.index;

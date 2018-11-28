@@ -1,7 +1,7 @@
 <view class='container'>
   <view class='left-wrapper'>
     <!-- 左边 -->
-    <scroll-view class="scroll-view_H" scroll-y="true"  style="height:100%">
+    <scroll-view class="scroll-view_H" scroll-y="true" style="height:100%">
       <view wx:if='{{list.length}}' wx:for='{{list}}' wx:key='unquie' class="nav-item {{index === navActive ? 'active' : ''}}" data-id="a{{item.id}}" data-index="{{index}}" catchtap="chooseType">{{item.type_name}}</view>
     </scroll-view>
   </view>
@@ -26,14 +26,35 @@
     </scroll-view>
   </view>
 </view>
+
 <!-- 购物车 -->
-<view class='shop-cart'>
-  <view class='item' wx:if='{{selectFoods.length}}' wx:for='{{selectFoods}}' wx:key='unquie'>
-    <block>
-      <view>{{item.name}}</view>
-      <view>￥{{item.money*item.count}}</view>
-      <!-- 购物车控制器 -->
-      <v-cart-control typeOneIndex='{{item.typeOneIndex}}' goodIndex='{{item.goodIndex}}' goodId='{{item.id}}' xsNum='{{item.xs_num}}' goodOne='{{item.one}}' goodCount='{{item.count}}' bind:stepperEvent='onStepperEvent'></v-cart-control>
-    </block>
+<view class='shop-cart' catchtap='showCartList'>
+  <view class='cart'>
+    <view class="iconfont icon-gouwuche {{selectFoods.length ? 'hight' : 'gary'}}"></view>
+    <view class='total-money'>共100元</view>
+  </view>
+  <view class='btn'>选好了</view>
+</view>
+
+
+<!-- 购物车详情 -->
+<view wx:if='{{closeShadow}}' class='cover-shadow' bindtap='closeShadow'>
+  <view class='shop-cart-list'>
+    <view class='cart-title'>
+      <view>已选商品</view>
+      <view bindtap='clearShopCart'>清空购物车</view>
+    </view>
+    <scroll-view class="{{selectFoods.length>5?'cart-scroll-list':''}}" scroll-y="true">
+      <view class='item' wx:for='{{selectFoods}}' wx:key='unquie'>
+        <block>
+          <view class='food-name'>{{item.name}}</view>
+          <view class='money'>￥{{item.money*item.count}}</view>
+          <!-- 购物车控制器 -->
+          <view class='cart-control'>
+            <v-cart-control typeOneIndex='{{item.typeOneIndex}}' goodIndex='{{item.goodIndex}}' goodId='{{item.id}}' xsNum='{{item.xs_num}}' goodOne='{{item.one}}' goodCount='{{item.count}}' bind:stepperEvent='onStepperEvent'></v-cart-control>
+          </view>
+        </block>
+      </view>
+    </scroll-view>
   </view>
 </view>
