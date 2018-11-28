@@ -38,7 +38,7 @@
 
 
 <!-- 购物车详情 -->
-<view wx:if='{{closeShadow}}' class='cover-shadow' bindtap='closeShadow'>
+<view wx:if='{{closeShadow && totalMoney}}' class='cover-shadow' bindtap='closeShadow'>
   <view class='shop-cart-list'>
     <view class='cart-title'>
       <view>已选商品</view>
