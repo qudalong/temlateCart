@@ -17,6 +17,7 @@ Page({
     heightArr: [],
     containerH: 0,
     totalMoeny:0,
+    totalCount:0,
     closeShadow: false
   },
   onLoad: function(options) {
@@ -80,12 +81,14 @@ Page({
       typeOneIndex = goods[i].typeOneIndex;
       goodIndex = goods[i].goodIndex;
       data[typeOneIndex].goods[goodIndex].count = 0;
+      data[typeOneIndex].typeItemCount = 0;
     }
 
     this.setData({
       selectFoods: [],
       list: this.data.list,
-      totalMoney:0
+      totalMoney:0,
+      totalCount:0
     })
   },
 
@@ -97,6 +100,64 @@ Page({
       toView: id,
       navActive: index
     })
+  },
+
+
+  //选择商品
+  onStepperEvent(e) {
+    let {
+      typeOneIndex,
+      goodIndex,
+      goodId,
+      xsNum,
+      goodOne,
+      goodCount
+    } = e.detail
+    let {
+      list,
+      selectFoods
+    } = this.data
+    let typeGood = list[typeOneIndex]
+    let good = list[typeOneIndex].goods[goodIndex]
+    let itemCount=0
+    //在这里改变自定义count的值
+    list[typeOneIndex].goods[goodIndex].count = goodCount
+    typeGood.goods.forEach((good)=>{
+      itemCount+=good.count||0
+    })
+    //添加属性要传的属性
+    typeGood.typeItemCount = itemCount
+
+    good.typeOneIndex = typeOneIndex;
+    good.goodIndex = goodIndex;
+    if (selectFoods.includes(good)) {
+      let index = selectFoods.indexOf(good)
+      // 当前商品为0是清空
+      goodCount === 0 ? selectFoods.splice(index, 1) : selectFoods[index].count = goodCount
+    } else {
+      selectFoods.push(good)
+    }
+    this.setData({
+      list,
+      selectFoods
+    })
+    this.calculateMoney(selectFoods)
+  },
+
+  /*计算价格和总数量*/
+  calculateMoney(selectFoods) {
+    let totalMoney = 0;
+    let totalCount = 0;
+    let price = 0;
+    for (let i = 0; i < selectFoods.length; i++) {
+      price = Number(selectFoods[i].money);
+      totalMoney = add(totalMoney, multi(price, selectFoods[i].count));
+      totalCount += selectFoods[i].count;
+    }
+    this.setData({
+      totalMoney,
+      totalCount
+    });
   },
 
   //右边滚动联动
@@ -120,53 +181,6 @@ Page({
     }
   },
 
-  //选择商品
-  onStepperEvent(e) {
-    let {
-      typeOneIndex,
-      goodIndex,
-      goodId,
-      xsNum,
-      goodOne,
-      goodCount
-    } = e.detail
-    let {
-      list,
-      selectFoods
-    } = this.data
-    let good = list[typeOneIndex].goods[goodIndex]
-    //在这里改变自定义count的值
-    list[typeOneIndex].goods[goodIndex].count = goodCount
-    //添加属性要传的属性
-    good.typeOneIndex = typeOneIndex;
-    good.goodIndex = goodIndex;
-    if (selectFoods.includes(good)) {
-      let index = selectFoods.indexOf(good)
-      // 当前商品为0是清空
-      goodCount === 0 ? selectFoods.splice(index, 1) : selectFoods[index].count = goodCount
-    } else {
-      selectFoods.push(good)
-    }
-    this.setData({
-      list,
-      selectFoods
-    })
-    this.calculateMoney(selectFoods)
-  },
-
-  /*计算价格*/
-  calculateMoney(selectFoods) {
-    let totalMoney = 0;
-    let price = 0;
-    for (let i = 0; i < selectFoods.length; i++) {
-      price = Number(selectFoods[i].money);
-      totalMoney = add(totalMoney, multi(price, selectFoods[i].count));
-      // totalMoney += selectFoods[i].count * price;
-    }
-    this.setData({
-      totalMoney: totalMoney
-    });
-  },
 
   onReady: function() {
 
