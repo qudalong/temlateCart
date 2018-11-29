@@ -1,4 +1,6 @@
-// pages/2/2.js
+const utils = require('../../utils/util');
+const multi = utils.floatOpration.multi;
+const add = utils.floatOpration.add;
 Page({
   go() {
     wx.navigateTo({
@@ -14,6 +16,7 @@ Page({
     navActive: 0,
     heightArr: [],
     containerH: 0,
+    totalMoeny:0,
     closeShadow: false
   },
   onLoad: function(options) {
@@ -67,19 +70,22 @@ Page({
     }
   },
 
-  clearShopCart(){
+  //清空购物车
+  clearShopCart() {
     let data = this.data.list;
     let goods = this.data.selectFoods;
-    let typeOneIndex, typeTwoIndex, goodIndex;
+
+    let typeOneIndex, goodIndex;
     for (let i = 0; i < goods.length; i++) {
-        typeOneIndex = goods[i].typeOneIndex;
-        goodIndex = goods[i].goodIndex;
+      typeOneIndex = goods[i].typeOneIndex;
+      goodIndex = goods[i].goodIndex;
+      data[typeOneIndex].goods[goodIndex].count = 0;
     }
-        data[typeOneIndex].goods[goodIndex].count = 0;
 
     this.setData({
       selectFoods: [],
-      list:[this.data.list]
+      list: this.data.list,
+      totalMoney:0
     })
   },
 
@@ -145,6 +151,21 @@ Page({
       list,
       selectFoods
     })
+    this.calculateMoney(selectFoods)
+  },
+
+  /*计算价格*/
+  calculateMoney(selectFoods) {
+    let totalMoney = 0;
+    let price = 0;
+    for (let i = 0; i < selectFoods.length; i++) {
+      price = Number(selectFoods[i].money);
+      totalMoney = add(totalMoney, multi(price, selectFoods[i].count));
+      // totalMoney += selectFoods[i].count * price;
+    }
+    this.setData({
+      totalMoney: totalMoney
+    });
   },
 
   onReady: function() {
