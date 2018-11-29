@@ -9,5 +9,4 @@
   background: #ff8200;
   color: #fff;
   line-height: 1.5;
-  z-index: 9999;
 }

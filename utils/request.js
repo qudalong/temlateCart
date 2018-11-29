@@ -9,7 +9,8 @@ function request({url,data={},method='GET'}){
 
 function _request(url, resolve, reject, data = {}, method = 'GET') {
   wx.request({
-    url: host + url,
+    // url: host + url,
+    url: url,
     header: {
       "content-type": "application/json"
     },

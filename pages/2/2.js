@@ -1,6 +1,11 @@
-const utils = require('../../utils/util');
-const multi = utils.floatOpration.multi;
-const add = utils.floatOpration.add;
+import {
+  floatOpration
+} from '../../utils/util.js'
+import {
+  request
+} from '../../utils/request.js'
+const multi = floatOpration.multi;
+const add = floatOpration.add;
 Page({
   go() {
     wx.navigateTo({
@@ -16,45 +21,38 @@ Page({
     navActive: 0,
     heightArr: [],
     containerH: 0,
-    totalMoeny:0,
-    totalCount:0,
+    totalMoeny: 0,
+    totalCount: 0,
     closeShadow: false
   },
   onLoad: function(options) {
-    var that = this
-    wx.request({
+    request({
       url: 'https://mp.ucloudant.com/app/index.php?i=56&t=0&v=9.2&from=wxapp&c=entry&a=wxapp&do=Dishes&m=zh_dianc&sign=819fcd817f0aeb118075924d12978351&id=5&dishes_type=2',
-      method: 'GET',
-      success: (res) => {
-        if (res.data.length) {
-          this.setData({
-            list: res.data,
-          })
-
-          let query = wx.createSelectorQuery();
-          let heightArr = [];
-          let s = 0;
-          // 获取每个分类高度
-          query.selectAll('.pesticide').boundingClientRect((react) => {
-            react.forEach((res) => {
-              s += res.height;
-              heightArr.push(s)
-            });
-            that.setData({
-              heightArr: heightArr
-            })
-          });
-          query.select('.content').boundingClientRect((res) => {
-            // 计算容器高度
-            that.setData({
-              containerH: res.height
-            })
-          }).exec()
-        }
-      }
+    }).then(res => {
+      this.setData({
+        list: res.data
+      })
+    }).then(() => {
+      let query = wx.createSelectorQuery();
+      let heightArr = [];
+      let s = 0;
+      // 获取每个分类高度
+      query.selectAll('.pesticide').boundingClientRect((react) => {
+        react.forEach((res) => {
+          s += res.height;
+          heightArr.push(s)
+        });
+        this.setData({
+          heightArr: heightArr
+        })
+      });
+      query.select('.content').boundingClientRect((res) => {
+        // 计算容器高度
+        this.setData({
+          containerH: res.height
+        })
+      }).exec()
     })
-
-
   },
 
   closeShadow() {
@@ -87,8 +85,8 @@ Page({
     this.setData({
       selectFoods: [],
       list: this.data.list,
-      totalMoney:0,
-      totalCount:0
+      totalMoney: 0,
+      totalCount: 0
     })
   },
 
@@ -119,11 +117,11 @@ Page({
     } = this.data
     let typeGood = list[typeOneIndex]
     let good = list[typeOneIndex].goods[goodIndex]
-    let itemCount=0
+    let itemCount = 0
     //在这里改变自定义count的值
     list[typeOneIndex].goods[goodIndex].count = goodCount
-    typeGood.goods.forEach((good)=>{
-      itemCount+=good.count||0
+    typeGood.goods.forEach((good) => {
+      itemCount += good.count || 0
     })
     //添加属性要传的属性
     typeGood.typeItemCount = itemCount
