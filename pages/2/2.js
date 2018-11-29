@@ -70,7 +70,7 @@ Page({
   clearShopCart(){
     let data = this.data.list;
     let goods = this.data.selectFoods;
-    let typeOneIndex, typeTwoIndex, goodsIndex;
+    let typeOneIndex, typeTwoIndex, goodIndex;
     for (let i = 0; i < goods.length; i++) {
         typeOneIndex = goods[i].typeOneIndex;
         goodIndex = goods[i].goodIndex;
@@ -79,7 +79,7 @@ Page({
 
     this.setData({
       selectFoods: [],
-      list
+      list:[this.data.list]
     })
   },
 
