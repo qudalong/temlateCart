@@ -23,7 +23,8 @@ Page({
     containerH: 0,
     totalMoeny: 0,
     totalCount: 0,
-    closeShadow: false
+    closeShadow: false,
+    showDetails: false,
   },
   onLoad: function(options) {
     request({
@@ -208,5 +209,17 @@ Page({
   },
   onShareAppMessage: function() {
 
+  },
+  closeShowDetails: function () {
+    this.setData({
+      showDetails: !this.data.showDetails
+    });
+  },
+  showDetails: function (e) {
+    const descImg=e.currentTarget.dataset.img;
+    this.setData({
+      descImg,
+      showDetails: true
+    });
   }
 })
