@@ -98,14 +98,7 @@
   color: #6d9eeb;
 }
 /* 购物车详情 */
-.shop-cart-list {
-  position: fixed;
-  left: 0;
-  bottom: 100rpx;
-  width: 100%;
-  background: #fff;
-  font-size: 30rpx;
-}
+
 .shop-cart-list .item {
   display: flex;
   justify-content: space-between;
@@ -252,4 +245,28 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.shop-cart-list {
+  position: fixed;
+  left: 0;
+  /* bottom: 100rpx; */
+  width: 100%;
+  background: #fff;
+  font-size: 30rpx;
+}
+
+/* 动画函数 */
+.translateY {
+  animation: showUp 0.5s 1 both;
+}
+
+@keyframes showUp {
+  0% {
+    bottom: 0rpx;
+  }
+
+  100% {
+    bottom: 100rpx;
+  }
 }

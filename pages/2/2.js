@@ -24,7 +24,7 @@ Page({
     totalMoeny: 0,
     totalCount: 0,
     closeShadow: false,
-    showDetails: false,
+    showDetails: false
   },
   onLoad: function(options) {
     request({
